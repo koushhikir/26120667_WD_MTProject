@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Koushhiki Roy | Digital Marketing & Sales Portfolio</title>
+    
+    <!-- Google Fonts: Playfair Display for editorial headings & Plus Jakarta Sans for clean UI/body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome for crisp professional icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                    },
+                    colors: {
+                        navy: {
+                            900: '#0f172a',
+                            800: '#1e293b',
+                            700: '#1e3a8a',
+                        },
+                        slatebg: '#f8fafc'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom CSS for Flexbox Navigation, Editorial Styling, and Print Optimization */
+        :root {
+            --primary-navy: #0f172a;
+            --accent-blue: #1e3a8a;
+            --bg-offwhite: #f8fafc;
+            --card-border: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-offwhite);
+            color: #1e293b;
+            overflow-x: hidden;
+        }
+
+        h1, h2, .font-editorial {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Explicit Flexbox Top Navigation Bar */
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
+        }
+
+        .nav-links-flex {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        /* Subtle card elevation and smooth hover transitions */
+        .editorial-card {
+            background: #ffffff;
+            border: 1px solid var(--card-border);
+            border-radius: 1rem;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+
+        .editorial-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px -8px rgba(15, 23, 42, 0.08);
+            border-color: #cbd5e1;
+        }
+
+        /* Active navigation link highlight */
+        .nav-link {
+            position: relative;
+            font-weight: 500;
+            color: #475569;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: #0f172a;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #1e3a8a;
+            transition: width 0.25s ease;
+        }
+
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* Mobile menu transition */
+        @media (max-width: 768px) {
+            .nav-links-flex {
+                display: none;
+            }
+            .nav-links-flex.mobile-open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(10px);
+                padding: 1.5rem;
+                gap: 1.25rem;
+                border-bottom: 1px solid #e2e8f0;
+                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            }
+        }
+
+        /* Print-Friendly Stylesheet */
+        @media print {
+            body {
+                background: #ffffff !important;
+                color: #000000 !important;
+                font-size: 11pt;
+            }
+            header, .no-print, footer .copy-actions {
+                display: none !important;
+            }
+            main {
+                padding-top: 0 !important;
+                max-width: 100% !important;
+            }
+            .editorial-card {
+                box-shadow: none !important;
+                border: 1px solid #cbd5e1 !important;
+                break-inside: avoid;
+                margin-bottom: 1rem !important;
+                padding: 1.25rem !important;
+            }
+            section {
+                padding-top: 1rem !important;
+                padding-bottom: 1rem !important;
+                break-inside: avoid;
+            }
+            .hero-card {
+                border: none !important;
+                border-bottom: 2px solid #0f172a !important;
+                border-radius: 0 !important;
+                padding-bottom: 1.5rem !important;
+            }
+            a {
+                text-decoration: none !important;
+                color: #0f172a !important;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-blue-900 selection:text-white">
+
+    <!-- Toast Notification for Copy-to-Clipboard Feedback -->
+    <div id="toast-notification" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none no-print">
+        <div class="bg-navy-900 text-white px-5 py-3 rounded-xl shadow-xl flex items-center gap-3 text-sm font-medium border border-slate-700">
+            <i class="fa-solid fa-circle-check text-emerald-400"></i>
+            <span id="toast-message">Copied to clipboard!</span>
+        </div>
+    </div>
+
+    <!-- Sticky Top Navigation Bar built with CSS Flexbox -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200/80">
+        <nav class="navbar-container relative" aria-label="Primary Navigation">
+            <!-- Brand / Monogram -->
+            <a href="#about" class="flex items-center gap-2.5 group">
+                <span class="w-9 h-9 rounded-lg bg-navy-900 text-white flex items-center justify-center font-serif font-bold text-lg tracking-wider group-hover:bg-navy-700 transition-colors">
+                    KR
+                </span>
+                <span class="font-semibold text-navy-900 tracking-tight text-base sm:text-lg">
+                    Koushhiki Roy
+                </span>
+            </a>
+
+            <!-- Desktop & Mobile Flexbox Navigation Links -->
+            <div id="nav-menu" class="nav-links-flex text-sm">
+                <a href="#about" class="nav-link active">About</a>
+                <a href="#qualifications" class="nav-link">Academic Qualifications</a>
+                <a href="#internship" class="nav-link">Internship</a>
+                <a href="#achievements" class="nav-link">Achievements</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#contact" class="nav-link">Contact</a>
+                <button onclick="window.print()" class="md:ml-2 inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-navy-900 text-white text-xs font-semibold hover:bg-navy-700 transition-colors shadow-sm cursor-pointer">
+                    <i class="fa-solid fa-print"></i>
+                    <span>Print / Save PDF</span>
+                </button>
+            </div>
+
+            <!-- Mobile Hamburger Toggle Button -->
+            <button id="mobile-menu-btn" type="button" class="md:hidden p-2.5 rounded-lg text-slate-700 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-slate-300" aria-label="Toggle Menu" aria-expanded="false">
+                <i id="menu-icon" class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-20 space-y-14">
+
+        <!-- HERO / ABOUT SECTION -->
+        <section id="about" class="scroll-mt-24">
+            <div class="editorial-card hero-card p-6 sm:p-10 lg:p-12 shadow-sm relative overflow-hidden">
+                <!-- Subtle decorative top accent bar -->
+                <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-navy-900 via-navy-700 to-blue-600 no-print"></div>
+
+                <div class="flex flex-col md:flex-row items-center md:items-start gap-8 lg:gap-10">
+                    <!-- Portrait Photo Frame -->
+                    <div class="shrink-0 flex flex-col items-center">
+                        <label for="photo-upload-input" class="w-40 h-44 sm:w-44 sm:h-48 rounded-2xl overflow-hidden border-4 border-slate-100 shadow-md bg-slate-100 ring-1 ring-slate-200 relative group cursor-pointer block" title="Click to upload or replace photo">
+                            <img 
+                                id="profile-photo"
+                                src="WhatsApp Image 2026-11-12 at 22.34.30_3.jpeg" 
+                                alt="Portrait of Koushhiki Roy" 
+                                class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                            >
+                            <div class="absolute inset-0 bg-navy-900/55 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white text-xs font-semibold gap-1.5 no-print">
+                                <i class="fa-solid fa-camera text-base"></i>
+                                <span>Replace Photo</span>
+                            </div>
+                        </label>
+                        <input id="photo-upload-input" type="file" accept="image/*" class="hidden">
+                        <label for="photo-upload-input" class="no-print mt-2.5 inline-flex items-center gap-1.5 text-xs font-semibold text-navy-700 hover:text-navy-900 cursor-pointer">
+                            <i class="fa-solid fa-upload"></i>
+                            <span>Upload / Replace Photo</span>
+                        </label>
+                    </div>
+
+                    <!-- Exact Personal Details from Resume -->
+                    <div class="flex-1 text-center md:text-left">
+                        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-navy-900 tracking-tight mb-3">
+                            Koushhiki Roy
+                        </h1>
+
+                        <p class="text-base sm:text-lg font-semibold text-navy-700 mb-5">
+                            IIM Bangalore BBA DBE &mdash; Bachelor’s in Business Administration on Digital Marketing
+                        </p>
+
+                        <!-- Exact Contact Details Row -->
+                        <div class="flex flex-wrap items-center justify-center md:justify-start gap-3 mb-6">
+                            <a href="mailto:koushhikiroy@gmail.com" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-100 text-navy-900 text-sm font-medium hover:bg-slate-200 transition-colors border border-slate-200">
+                                <i class="fa-solid fa-envelope text-navy-700"></i>
+                                <span>koushhikiroy@gmail.com</span>
+                            </a>
+
+                            <a href="tel:+918981788534" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-100 text-navy-900 text-sm font-medium hover:bg-slate-200 transition-colors border border-slate-200">
+                                <i class="fa-solid fa-phone text-navy-700"></i>
+                                <span>+91 898 1788 534</span>
+                            </a>
+
+                            <span class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-100 text-navy-900 text-sm font-medium border border-slate-200">
+                                <i class="fa-solid fa-location-dot text-navy-700"></i>
+                                <span>Kolkata</span>
+                            </span>
+
+                            <a href="https://www.linkedin.com/in/koushhikiroy" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-blue-50 text-navy-700 text-sm font-semibold hover:bg-blue-100 transition-colors border border-blue-200">
+                                <i class="fa-brands fa-linkedin text-base"></i>
+                                <span>Linkedin ID - koushhikiroy</span>
+                            </a>
+                        </div>
+
+                        <!-- Print / Save PDF Action -->
+                        <div class="flex flex-wrap items-center justify-center md:justify-start gap-3 no-print">
+                            <button onclick="window.print()" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-navy-900 text-white text-sm font-semibold hover:bg-navy-700 transition-all shadow-sm hover:shadow cursor-pointer">
+                                <i class="fa-solid fa-file-arrow-down"></i>
+                                <span>Print / Save PDF</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ACADEMIC QUALIFICATIONS SECTION -->
+        <section id="qualifications" class="scroll-mt-24">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-navy-900">Academic Qualifications</h2>
+                </div>
+                <div class="hidden sm:block h-px flex-1 bg-slate-200 ml-6"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- College -->
+                <div class="editorial-card p-6 flex flex-col justify-between border-t-4 border-t-navy-900">
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-3">
+                            <span class="text-xs font-bold uppercase tracking-wider text-navy-700 bg-blue-50 px-2.5 py-1 rounded-md">
+                                College
+                            </span>
+                            <span class="text-xs font-semibold text-slate-600">2026 – 2029</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-navy-900 leading-snug mb-1.5">
+                            IIM Bangalore BBA DBE
+                        </h3>
+                        <p class="text-sm font-medium text-slate-700">
+                            Bachelor’s in Business Administration on Digital Marketing
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Class XII -->
+                <div class="editorial-card p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-3">
+                            <span class="text-xs font-bold uppercase tracking-wider text-slate-700 bg-slate-100 px-2.5 py-1 rounded-md">
+                                Class XII | School, Board
+                            </span>
+                            <span class="text-xs font-semibold text-slate-600">2026</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-navy-900 leading-snug mb-1.5">
+                            Holy Mother’s Academy, CBSE Board
+                        </h3>
+                    </div>
+                </div>
+
+                <!-- Class X -->
+                <div class="editorial-card p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-3">
+                            <span class="text-xs font-bold uppercase tracking-wider text-slate-700 bg-slate-100 px-2.5 py-1 rounded-md">
+                                Class X | School, Board
+                            </span>
+                            <span class="text-xs font-semibold text-slate-600">2023</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-navy-900 leading-snug mb-1.5">
+                            Delhi Public School Megacity, ICSE Board
+                        </h3>
+                        <p class="text-sm italic text-slate-600">
+                            Secondary school certificate
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- INTERNSHIP SECTION -->
+        <section id="internship" class="scroll-mt-24">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-navy-900">Internship</h2>
+                </div>
+                <div class="hidden sm:block h-px flex-1 bg-slate-200 ml-6"></div>
+            </div>
+
+            <div class="space-y-6">
+                <!-- Internship 1: Dublieu -->
+                <article class="editorial-card p-6 sm:p-8 relative">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                        <div>
+                            <h3 class="text-xl font-bold text-navy-900">Dublieu</h3>
+                            <p class="text-base font-semibold text-navy-700 mt-0.5">Marketing Intern</p>
+                        </div>
+                        <div class="inline-flex items-center gap-2 text-xs font-semibold text-slate-600 bg-slate-100 px-3.5 py-1.5 rounded-lg self-start sm:self-center">
+                            <i class="fa-regular fa-calendar"></i>
+                            <span>2023 – December 2024</span>
+                        </div>
+                    </div>
+
+                    <ul class="space-y-3 text-slate-700 text-sm sm:text-base leading-relaxed">
+                        <li class="flex items-start gap-3">
+                            <span class="w-1.5 h-1.5 rounded-full bg-navy-700 mt-2.5 shrink-0"></span>
+                            <span>This was my first internship from where I got to know how marketing actually work. I have made invitations for several small businesses, learned how to make and send cold mails and cold calls have had a lot of earlier failures but learned on the way and one of the best thing I learned how to pitch to our consumers. In this internship our target audience was to invite individuals who had done one or more MUNs to participate in upcoming events hosted by our company taught me a lot on how to prove my point and encourage others to participate and most of all while cold calling we even needed to convince the parents of the individuals as why the experience is going to help their child so I got to know a lot.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="w-1.5 h-1.5 rounded-full bg-navy-700 mt-2.5 shrink-0"></span>
+                            <span class="font-semibold text-navy-900">Worked with 200+ clients</span>
+                        </li>
+                    </ul>
+                </article>
+
+                <!-- Internship 2: Team Taurus -->
+                <article class="editorial-card p-6 sm:p-8 relative">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                        <div>
+                            <h3 class="text-xl font-bold text-navy-900">Team Taurus</h3>
+                            <p class="text-base font-semibold text-navy-700 mt-0.5">Sales Intern</p>
+                        </div>
+                        <div class="inline-flex items-center gap-2 text-xs font-semibold text-slate-600 bg-slate-100 px-3.5 py-1.5 rounded-lg self-start sm:self-center">
+                            <i class="fa-regular fa-calendar"></i>
+                            <span>2026 - present</span>
+                        </div>
+                    </div>
+
+                    <ul class="space-y-3 text-slate-700 text-sm sm:text-base leading-relaxed">
+                        <li class="flex items-start gap-3">
+                            <span class="w-1.5 h-1.5 rounded-full bg-navy-700 mt-2.5 shrink-0"></span>
+                            <span>This is my family business which I have grown around learning and still learning everyday. I have worked with clients hands on since my first day seen my seniors pitch and have practiced countless times as well as given my own pitch to clients in-front of me it taught me how to be ready for any situations at any point of time and even be more attentive to each and every small detail.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="w-1.5 h-1.5 rounded-full bg-navy-700 mt-2.5 shrink-0"></span>
+                            <span class="font-semibold text-navy-900">Worked with 50+ clients.</span>
+                        </li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <!-- ACHIEVEMENTS & EXTRA-CURRICULAR SECTION -->
+        <section id="achievements" class="scroll-mt-24">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-navy-900">Achievements &amp; Extra-Curricular</h2>
+                </div>
+                <div class="hidden sm:block h-px flex-1 bg-slate-200 ml-6"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Achievement 1 -->
+                <div class="editorial-card p-6 flex items-start gap-4">
+                    <div class="w-11 h-11 rounded-xl bg-amber-50 text-amber-600 border border-amber-200/70 flex items-center justify-center shrink-0 text-lg">
+                        <i class="fa-solid fa-trophy"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-base font-bold text-navy-900 leading-snug">
+                            Certificate from Clever Harvey on Junior CEO, CMO, CFO.
+                        </h3>
+                    </div>
+                </div>
+
+                <!-- Achievement 2 -->
+                <div class="editorial-card p-6 flex items-start gap-4">
+                    <div class="w-11 h-11 rounded-xl bg-blue-50 text-navy-700 border border-blue-200/70 flex items-center justify-center shrink-0 text-lg">
+                        <i class="fa-solid fa-certificate"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-base font-bold text-navy-900 leading-snug">
+                            Diploma in Real Estate Marketing &amp; Sales from Indian Institute of Skill Development &amp; Training.
+                        </h3>
+                    </div>
+                </div>
+
+                <!-- Achievement 3 -->
+                <div class="editorial-card p-6 flex items-start gap-4">
+                    <div class="w-11 h-11 rounded-xl bg-indigo-50 text-indigo-600 border border-indigo-200/70 flex items-center justify-center shrink-0 text-lg">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-base font-bold text-navy-900 leading-snug">
+                            Certificate of Completion of a program on Ai tools and designing.
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SKILLS SECTION -->
+        <section id="skills" class="scroll-mt-24">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-navy-900">Skills</h2>
+                </div>
+                <div class="hidden sm:block h-px flex-1 bg-slate-200 ml-6"></div>
+            </div>
+
+            <div class="editorial-card p-6 sm:p-8">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                    <!-- Skill 1: Excel -->
+                    <div class="p-4 rounded-xl bg-slate-50 border border-slate-200/70 flex items-center gap-3">
+                        <span class="w-9 h-9 rounded-lg bg-emerald-700 text-white flex items-center justify-center text-sm shrink-0">
+                            <i class="fa-solid fa-table"></i>
+                        </span>
+                        <span class="font-bold text-navy-900 text-sm">Excel</span>
+                    </div>
+
+                    <!-- Skill 2: Word -->
+                    <div class="p-4 rounded-xl bg-slate-50 border border-slate-200/70 flex items-center gap-3">
+                        <span class="w-9 h-9 rounded-lg bg-blue-700 text-white flex items-center justify-center text-sm shrink-0">
+                            <i class="fa-solid fa-file-word"></i>
+                        </span>
+                        <span class="font-bold text-navy-900 text-sm">Word</span>
+                    </div>
+
+                    <!-- Skill 3: Powerpoint -->
+                    <div class="p-4 rounded-xl bg-slate-50 border border-slate-200/70 flex items-center gap-3">
+                        <span class="w-9 h-9 rounded-lg bg-orange-600 text-white flex items-center justify-center text-sm shrink-0">
+                            <i class="fa-solid fa-file-powerpoint"></i>
+                        </span>
+                        <span class="font-bold text-navy-900 text-sm">Powerpoint</span>
+                    </div>
+
+                    <!-- Skill 4: Video Editing -->
+                    <div class="p-4 rounded-xl bg-slate-50 border border-slate-200/70 flex items-center gap-3">
+                        <span class="w-9 h-9 rounded-lg bg-purple-700 text-white flex items-center justify-center text-sm shrink-0">
+                            <i class="fa-solid fa-film"></i>
+                        </span>
+                        <span class="font-bold text-navy-900 text-sm">Video Editing</span>
+                    </div>
+
+                    <!-- Skill 5: Canva -->
+                    <div class="p-4 rounded-xl bg-slate-50 border border-slate-200/70 flex items-center gap-3">
+                        <span class="w-9 h-9 rounded-lg bg-cyan-600 text-white flex items-center justify-center text-sm shrink-0">
+                            <i class="fa-solid fa-palette"></i>
+                        </span>
+                        <span class="font-bold text-navy-900 text-sm">Canva</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact" class="scroll-mt-24">
+            <div class="editorial-card bg-navy-900 text-white p-8 sm:p-10 border-none shadow-lg">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+                    <div>
+                        <h2 class="text-2xl sm:text-3xl font-bold text-white mb-2">Contact</h2>
+                        <p class="text-slate-300 text-sm sm:text-base flex items-center gap-2">
+                            <i class="fa-solid fa-location-dot text-blue-300"></i>
+                            <span>Kolkata</span>
+                        </p>
+                    </div>
+
+                    <!-- Direct Contact Cards with Copy-to-Clipboard Actions -->
+                    <div class="w-full md:w-auto flex flex-col gap-3 copy-actions">
+                        <!-- Email Row -->
+                        <div class="flex items-center justify-between gap-4 bg-white/10 hover:bg-white/15 border border-white/15 rounded-xl px-4 py-3 transition-colors">
+                            <a href="mailto:koushhikiroy@gmail.com" class="flex items-center gap-3 text-sm font-medium text-white">
+                                <i class="fa-solid fa-envelope text-blue-300"></i>
+                                <span>koushhikiroy@gmail.com</span>
+                            </a>
+                            <button onclick="copyText('koushhikiroy@gmail.com', 'Email address copied!')" class="p-2 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-semibold text-blue-200 transition-colors cursor-pointer" title="Copy Email">
+                                <i class="fa-regular fa-copy"></i> Copy
+                            </button>
+                        </div>
+
+                        <!-- Phone Row -->
+                        <div class="flex items-center justify-between gap-4 bg-white/10 hover:bg-white/15 border border-white/15 rounded-xl px-4 py-3 transition-colors">
+                            <a href="tel:+918981788534" class="flex items-center gap-3 text-sm font-medium text-white">
+                                <i class="fa-solid fa-phone text-blue-300"></i>
+                                <span>+91 898 1788 534</span>
+                            </a>
+                            <button onclick="copyText('+91 898 1788 534', 'Phone number copied!')" class="p-2 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-semibold text-blue-200 transition-colors cursor-pointer" title="Copy Phone">
+                                <i class="fa-regular fa-copy"></i> Copy
+                            </button>
+                        </div>
+
+                        <!-- LinkedIn Row -->
+                        <div class="flex items-center justify-between gap-4 bg-blue-600 hover:bg-blue-500 rounded-xl px-4 py-3 text-sm font-semibold text-white transition-colors shadow-sm">
+                            <a href="https://www.linkedin.com/in/koushhikiroy" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3">
+                                <i class="fa-brands fa-linkedin text-lg"></i>
+                                <span>Linkedin ID - koushhikiroy</span>
+                            </a>
+                            <button onclick="copyText('koushhikiroy', 'LinkedIn ID copied!')" class="p-2 rounded-lg bg-white/15 hover:bg-white/25 text-xs font-semibold text-white transition-colors cursor-pointer" title="Copy LinkedIn ID">
+                                <i class="fa-regular fa-copy"></i> Copy
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Minimal Footer -->
+    <footer class="border-t border-slate-200 bg-white py-6 text-center text-xs text-slate-500">
+        <div class="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+            <p><strong class="text-navy-900">Koushhiki Roy</strong></p>
+            <p>Kolkata &bull; IIM Bangalore BBA DBE</p>
+        </div>
+    </footer>
+
+    <!-- Interactive JavaScript -->
+    <script>
+        // Portrait Image Fallback Chain + LocalStorage Photo Upload Persistence
+        const profilePhoto = document.getElementById('profile-photo');
+        const photoUploadInput = document.getElementById('photo-upload-input');
+
+        const svgPortraitFallback = "data:image/svg+xml;utf8," + encodeURIComponent(`
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 360">
+                <defs>
+                    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#e0e7ff"/>
+                        <stop offset="55%" stop-color="#f1f5f9"/>
+                        <stop offset="100%" stop-color="#fef3c7"/>
+                    </linearGradient>
+                    <linearGradient id="shirt" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#ffffff"/>
+                        <stop offset="100%" stop-color="#e2e8f0"/>
+                    </linearGradient>
+                </defs>
+                <rect width="320" height="360" fill="url(#bg)"/>
+                <!-- Back hair & low ponytail -->
+                <ellipse cx="160" cy="148" rx="66" ry="72" fill="#1e1b18"/>
+                <path d="M210 185 Q232 215 224 248 Q208 238 202 210 Z" fill="#1e1b18"/>
+                <!-- Neck -->
+                <rect x="142" y="196" width="36" height="44" rx="14" fill="#d99b78"/>
+                <!-- White Collared Shirt -->
+                <path d="M52 360 C56 286 98 246 160 246 C222 246 264 286 268 360 Z" fill="url(#shirt)" stroke="#cbd5e1" stroke-width="2"/>
+                <path d="M136 236 L160 278 L124 286 L128 244 Z" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+                <path d="M184 236 L160 278 L196 286 L192 244 Z" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+                <line x1="160" y1="278" x2="160" y2="360" stroke="#cbd5e1" stroke-width="2"/>
+                <circle cx="160" cy="306" r="3" fill="#94a3b8"/>
+                <circle cx="160" cy="336" r="3" fill="#94a3b8"/>
+                <!-- Face -->
+                <path d="M108 144 C108 102 212 102 212 144 C212 192 188 218 160 218 C132 218 108 192 108 144 Z" fill="#e5a987"/>
+                <!-- Hair Parting -->
+                <path d="M106 150 C104 102 132 82 160 82 C188 82 216 102 214 150 C206 122 184 112 160 112 C136 112 114 122 106 150 Z" fill="#1e1b18"/>
+                <!-- Eyebrows & Eyes -->
+                <path d="M124 142 Q137 137 148 142" stroke="#1e1b18" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+                <path d="M172 142 Q183 137 196 142" stroke="#1e1b18" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+                <ellipse cx="137" cy="153" rx="8" ry="5.5" fill="#ffffff"/>
+                <circle cx="137" cy="153" r="4.2" fill="#1e1b18"/>
+                <circle cx="138.5" cy="151.5" r="1.3" fill="#ffffff"/>
+                <ellipse cx="183" cy="153" rx="8" ry="5.5" fill="#ffffff"/>
+                <circle cx="183" cy="153" r="4.2" fill="#1e1b18"/>
+                <circle cx="184.5" cy="151.5" r="1.3" fill="#ffffff"/>
+                <!-- Nose & Lips -->
+                <path d="M160 154 L157 173 Q160 176 164 173" stroke="#b97a58" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+                <path d="M146 191 Q160 186 174 191 Q160 198 146 191 Z" fill="#c07368"/>
+            </svg>
+        `);
+
+        const fallbackSources = [
+            'WhatsApp Image 2026-11-12 at 22.34.30_2.jpeg',
+            'WhatsApp Image 2026-11-12 at 22.34.30.jpeg',
+            svgPortraitFallback
+        ];
+        let fallbackIndex = 0;
+
+        profilePhoto.addEventListener('error', () => {
+            if (fallbackIndex < fallbackSources.length) {
+                profilePhoto.src = fallbackSources[fallbackIndex++];
+            }
+        });
+
+        // Load previously uploaded portrait if saved in localStorage
+        try {
+            const savedPhoto = localStorage.getItem('koushhiki_resume_photo');
+            if (savedPhoto) {
+                profilePhoto.src = savedPhoto;
+            }
+        } catch (e) {
+            // Ignore storage restrictions
+        }
+
+        // Handle user photo upload
+        photoUploadInput.addEventListener('change', (event) => {
+            const file = event.target.files && event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const dataUrl = e.target.result;
+                profilePhoto.src = dataUrl;
+                try {
+                    localStorage.setItem('koushhiki_resume_photo', dataUrl);
+                } catch (err) {
+                    // Ignore storage quota errors
+                }
+                showToast('Photo updated!');
+            };
+            reader.readAsDataURL(file);
+        });
+
+        // Mobile Hamburger Navigation Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const navMenu = document.getElementById('nav-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            const isOpen = navMenu.classList.toggle('mobile-open');
+            mobileMenuBtn.setAttribute('aria-expanded', isOpen);
+            menuIcon.className = isOpen ? 'fa-solid fa-xmark text-xl' : 'fa-solid fa-bars text-xl';
+        });
+
+        // Close mobile menu when a navigation link is clicked
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('mobile-open');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                menuIcon.className = 'fa-solid fa-bars text-xl';
+            });
+        });
+
+        // Highlight active section in navigation bar on scroll
+        const sections = document.querySelectorAll('section[id]');
+        window.addEventListener('scroll', () => {
+            let currentId = '';
+            const scrollPosition = window.scrollY + 140;
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    currentId = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentId}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Copy-to-Clipboard Helper using execCommand for broad iframe compatibility
+        let toastTimeout;
+        function copyText(text, message) {
+            const tempInput = document.createElement('textarea');
+            tempInput.value = text;
+            tempInput.style.position = 'fixed';
+            tempInput.style.opacity = '0';
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            try {
+                document.execCommand('copy');
+                showToast(message);
+            } catch (err) {
+                showToast('Unable to copy text');
+            }
+            document.body.removeChild(tempInput);
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast-notification');
+            const toastMsg = document.getElementById('toast-message');
+            toastMsg.textContent = message;
+
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 2600);
+        }
+    </script>
+</body>
+</html>
